@@ -12,11 +12,11 @@ You are Shradha's Virtual Assistant. Shradha is a high-end photographer based in
 
 export async function chatWithAssistant(userMessage: string) {
   try {
-    // The API_KEY must be provided in Vercel's Environment Variables settings
+    // The API_KEY is provided by the execution environment
     const apiKey = process.env.API_KEY;
     if (!apiKey) {
-      console.error("API_KEY is missing from environment variables.");
-      return "I'm currently offline. Please contact Shradha via the email listed below!";
+      console.error("API_KEY is not defined in the environment.");
+      return "I'm currently resting. Please reach out to Shradha via email!";
     }
 
     const ai = new GoogleGenAI({ apiKey });
@@ -29,10 +29,10 @@ export async function chatWithAssistant(userMessage: string) {
       },
     });
     
-    // Using the .text property directly as per Google GenAI SDK standards
-    return response.text || "I'm here to help with any photography questions!";
+    // Accessing .text as a property as per latest @google/genai standards
+    return response.text || "I'm happy to help with your photography needs!";
   } catch (error) {
-    console.error("AI Assistant Error:", error);
-    return "I'm sorry, I'm having trouble connecting to Shradha's creative energy right now. Please try again later!";
+    console.error("Assistant API Error:", error);
+    return "I'm having a bit of trouble connecting to Shradha's creative studio. Please try again in a moment!";
   }
 }
