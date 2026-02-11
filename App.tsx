@@ -7,6 +7,7 @@ import Navigation from './components/Navigation';
 import WorkView from './components/WorkView';
 import BookingView from './components/BookingView';
 import ProfileView from './components/ProfileView';
+import AiAssistant from './components/AiAssistant';
 
 const App: React.FC = () => {
   const [currentView, setCurrentView] = useState<AppView>(AppView.WORK);
@@ -36,7 +37,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col pb-24 max-w-md mx-auto relative bg-background-light dark:bg-background-dark overflow-x-hidden">
+    <div className="min-h-screen flex flex-col pb-24 max-w-md mx-auto relative bg-background-light dark:bg-background-dark overflow-x-hidden transition-colors duration-500">
       <StatusBar />
       <Header />
       
@@ -44,6 +45,7 @@ const App: React.FC = () => {
         {renderView()}
       </main>
 
+      <AiAssistant />
       <Navigation currentView={currentView} onNavigate={setCurrentView} />
       
       {/* Home Indicator */}
