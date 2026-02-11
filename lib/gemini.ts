@@ -12,6 +12,7 @@ You are Shradha's Virtual Assistant. Shradha is a high-end photographer based in
 
 export async function chatWithAssistant(userMessage: string) {
   try {
+    // Accessing API_KEY directly from process.env as per guidelines
     const ai = new GoogleGenAI({ apiKey: process.env.API_KEY as string });
     const response = await ai.models.generateContent({
       model: "gemini-3-flash-preview",
@@ -21,6 +22,7 @@ export async function chatWithAssistant(userMessage: string) {
         temperature: 0.7,
       },
     });
+    // Correctly using .text property as per guidelines
     return response.text;
   } catch (error) {
     console.error("AI Assistant Error:", error);
