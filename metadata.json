@@ -1,0 +1,7 @@
+{
+  "name": "Copy of Shradha Photography Portfolio",
+  "description": "A minimalist, elegant photography portfolio and booking application with a focus on high-end aesthetics and seamless user experience.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
