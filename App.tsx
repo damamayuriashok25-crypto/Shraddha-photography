@@ -7,11 +7,16 @@ import Navigation from './components/Navigation';
 import WorkView from './components/WorkView';
 import BookingView from './components/BookingView';
 import ProfileView from './components/ProfileView';
-import AiAssistant from './components/AiAssistant';
+import ChatView from './components/ChatView';
 
 const App: React.FC = () => {
   const [currentView, setCurrentView] = useState<AppView>(AppView.WORK);
   const [isDarkMode, setIsDarkMode] = useState(false);
+  
+  // Persistent chat state across tab switches
+  const [chatMessages, setChatMessages] = useState<{role: 'user' | 'ai', text: string}[]>([
+    { role: 'ai', text: 'Hi! I’m Shradha’s assistant. How can I help you plan your perfect session today?' }
+  ]);
 
   useEffect(() => {
     if (isDarkMode) {
@@ -29,6 +34,8 @@ const App: React.FC = () => {
         return <WorkView />;
       case AppView.BOOK:
         return <BookingView />;
+      case AppView.CHAT:
+        return <ChatView messages={chatMessages} setMessages={setChatMessages} />;
       case AppView.PROFILE:
         return <ProfileView toggleDarkMode={toggleDarkMode} isDarkMode={isDarkMode} />;
       default:
@@ -45,7 +52,6 @@ const App: React.FC = () => {
         {renderView()}
       </main>
 
-      <AiAssistant />
       <Navigation currentView={currentView} onNavigate={setCurrentView} />
       
       {/* Home Indicator */}

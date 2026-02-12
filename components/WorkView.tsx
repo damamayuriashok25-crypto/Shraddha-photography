@@ -36,7 +36,7 @@ const WorkView: React.FC = () => {
             <section className="mb-10 px-2">
               <h2 className="font-display text-4xl text-primary mb-3">The Artist</h2>
               <p className="text-sm leading-relaxed text-slate-600 dark:text-slate-400 font-light max-w-sm">
-                Capturing the quiet moments between the chaos. Based in the Pacific Northwest, specializing in natural light lifestyle and intimate portraiture. Every frame tells a story of light, shadow, and human connection.
+                Capturing the quiet moments between the chaos. Specialized in natural light, intimate portraiture, and high-end events. Every frame tells a story of light, shadow, and human connection.
               </p>
               <div className="mt-6 flex items-center space-x-4">
                 <button className="bg-primary text-white px-6 py-2.5 rounded-full text-sm font-medium shadow-lg shadow-primary/20 hover:scale-105 active:scale-95 transition-all">
@@ -62,23 +62,28 @@ const WorkView: React.FC = () => {
         )}
 
         {activeTab === PortfolioTab.SERVICES && (
-          <div className="py-12 text-center animate-in slide-in-from-bottom-4 duration-500">
+          <div className="py-6 text-center animate-in slide-in-from-bottom-4 duration-500">
             <h2 className="font-display text-4xl text-primary mb-6">Our Services</h2>
-            <div className="space-y-6">
+            <div className="grid gap-4">
               <ServiceCard 
-                title="Wedding Photography" 
-                desc="Capturing your special day with a timeless and romantic eye."
-                price="Starting from $2,500"
+                title="Wedding Storytelling" 
+                desc="Comprehensive coverage of your special day with a timeless romantic aesthetic."
+                price="Starting from ₹1,50,000"
               />
               <ServiceCard 
-                title="Lifestyle Portraiture" 
-                desc="Authentic, natural-light sessions for individuals and families."
-                price="Starting from $450"
+                title="Maternity Portraits" 
+                desc="Celebrate the journey of motherhood with elegant, glow-focused sessions."
+                price="₹35,000"
               />
               <ServiceCard 
-                title="Commercial & Branding" 
-                desc="High-end imagery for your brand, product, or architectural needs."
-                price="Inquire for Quote"
+                title="Pre-Wedding" 
+                desc="Cinematic couple sessions at breathtaking locations."
+                price="₹60,000"
+              />
+              <ServiceCard 
+                title="Corporate Branding" 
+                desc="Elevate your professional presence with high-end headshots."
+                price="Starting from ₹15,000"
               />
             </div>
           </div>
@@ -89,12 +94,12 @@ const WorkView: React.FC = () => {
              <h2 className="font-display text-4xl text-primary mb-8 text-center">Love Stories</h2>
              <div className="space-y-8 px-4">
                 <TestimonialItem 
-                  quote="Shradha has an incredible gift for making you feel completely at ease. Our wedding photos are more than we could have ever dreamed of."
-                  author="Emma & Liam"
+                  quote="Shradha has an incredible gift for making you feel completely at ease. Our maternity photos are pure magic."
+                  author="Priya & Rahul"
                 />
                 <TestimonialItem 
-                  quote="The way she captures light is pure magic. She found the beauty in the simplest moments during our family session."
-                  author="Sarah J."
+                  quote="The way she captures light and raw emotion is unmatched. Best investment for our wedding memories."
+                  author="Ananya S."
                 />
              </div>
           </div>
@@ -108,7 +113,7 @@ const ServiceCard: React.FC<{ title: string; desc: string; price: string }> = ({
   <div className="bg-card-light dark:bg-card-dark p-6 rounded-2xl border border-slate-100 dark:border-white/5 text-left shadow-sm">
     <h3 className="text-lg font-semibold text-slate-800 dark:text-white mb-2">{title}</h3>
     <p className="text-sm text-slate-500 dark:text-slate-400 mb-4">{desc}</p>
-    <p className="text-primary font-medium">{price}</p>
+    <p className="text-primary font-bold">{price}</p>
   </div>
 );
 

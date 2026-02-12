@@ -2,6 +2,7 @@
 export enum AppView {
   WORK = 'work',
   BOOK = 'book',
+  CHAT = 'chat',
   PROFILE = 'profile'
 }
 
