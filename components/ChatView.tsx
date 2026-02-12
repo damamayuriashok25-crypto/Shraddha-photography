@@ -4,14 +4,19 @@ import { chatWithAssistant } from '../lib/gemini';
 
 const QUICK_PROMPTS = [
   "Maternity shoot pricing?",
-  "Dress for maternity shoot?",
+  "Maternity dress ideas?",
   "Pre-wedding in ₹?",
-  "Wedding packages",
-  "Corporate headshots"
+  "Wedding packages?",
+  "Corporate photos"
 ];
 
 const SUPPORTED_LANGUAGES = [
-  "English", "हिन्दी", "Español", "Français", "Deutsch", "मराठी", "తెలుగు"
+  { name: "English", code: "en" },
+  { name: "हिन्दी", code: "hi" },
+  { name: "Español", code: "es" },
+  { name: "Français", code: "fr" },
+  { name: "मराठी", code: "mr" },
+  { name: "తెలుగు", code: "te" }
 ];
 
 interface ChatViewProps {
@@ -47,13 +52,24 @@ const ChatView: React.FC<ChatViewProps> = ({ messages, setMessages }) => {
     <div className="flex flex-col h-full animate-in slide-in-from-right duration-500">
       <div className="px-6 py-2">
         <h2 className="font-display text-4xl text-primary">Assistant</h2>
+        
+        {/* Interactive Language Bar */}
         <div className="flex items-center space-x-2 overflow-x-auto no-scrollbar py-2">
-          <span className="text-[9px] uppercase tracking-tighter text-slate-400 font-bold whitespace-nowrap">I speak:</span>
-          {SUPPORTED_LANGUAGES.map((lang, i) => (
-            <span key={i} className="text-[10px] bg-slate-100 dark:bg-white/5 px-2 py-0.5 rounded text-slate-500 whitespace-nowrap">
-              {lang}
-            </span>
-          ))}
+          <div className="flex items-center space-x-1.5 min-w-fit px-2 py-1 bg-primary/5 rounded-full border border-primary/10">
+            <span className="material-icons-round text-[12px] text-primary">translate</span>
+            <span className="text-[9px] uppercase tracking-tighter text-primary font-bold whitespace-nowrap">Multi-Language Support</span>
+          </div>
+          <div className="flex space-x-2">
+            {SUPPORTED_LANGUAGES.map((lang, i) => (
+              <button 
+                key={i} 
+                onClick={() => handleSend(`Hello, I'd like to speak in ${lang.name}`)}
+                className="text-[10px] bg-white dark:bg-white/5 px-3 py-1 rounded-full text-slate-500 whitespace-nowrap border border-slate-200 dark:border-white/10 hover:border-primary/50 transition-colors shadow-sm"
+              >
+                {lang.name}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -106,7 +122,7 @@ const ChatView: React.FC<ChatViewProps> = ({ messages, setMessages }) => {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyPress={(e) => e.key === 'Enter' && handleSend()}
-            placeholder="Type in your language..."
+            placeholder="Ask about shoots, pricing, styling..."
             className="flex-1 text-sm bg-white dark:bg-card-dark border-none ring-1 ring-slate-200 dark:ring-white/10 focus:ring-2 focus:ring-primary rounded-2xl py-3.5 px-5 dark:text-white placeholder:text-slate-400 shadow-sm"
           />
           <button 
