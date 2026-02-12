@@ -4,19 +4,14 @@ import { chatWithAssistant } from '../lib/gemini';
 
 const QUICK_PROMPTS = [
   "Maternity shoot pricing?",
-  "Maternity dress ideas?",
+  "Dress for maternity shoot?",
   "Pre-wedding in ₹?",
   "Wedding packages?",
   "Corporate photos"
 ];
 
 const SUPPORTED_LANGUAGES = [
-  { name: "English", code: "en" },
-  { name: "हिन्दी", code: "hi" },
-  { name: "Español", code: "es" },
-  { name: "Français", code: "fr" },
-  { name: "मराठी", code: "mr" },
-  { name: "తెలుగు", code: "te" }
+  "English", "हिन्दी", "Español", "Français", "Deutsch", "मराठी", "తెలుగు"
 ];
 
 interface ChatViewProps {
@@ -49,42 +44,37 @@ const ChatView: React.FC<ChatViewProps> = ({ messages, setMessages }) => {
   };
 
   return (
-    <div className="flex flex-col h-full animate-in slide-in-from-right duration-500">
-      <div className="px-6 py-2">
-        <h2 className="font-display text-4xl text-primary">Assistant</h2>
+    <div className="flex flex-col h-[calc(100vh-160px)] animate-in slide-in-from-right duration-500 overflow-hidden bg-background-light dark:bg-background-dark">
+      {/* Header / Assistant Info */}
+      <div className="px-6 pt-4 pb-2">
+        <h2 className="font-display text-5xl text-primary mb-3">Assistant</h2>
         
-        {/* Interactive Language Bar */}
-        <div className="flex items-center space-x-2 overflow-x-auto no-scrollbar py-2">
-          <div className="flex items-center space-x-1.5 min-w-fit px-2 py-1 bg-primary/5 rounded-full border border-primary/10">
-            <span className="material-icons-round text-[12px] text-primary">translate</span>
-            <span className="text-[9px] uppercase tracking-tighter text-primary font-bold whitespace-nowrap">Multi-Language Support</span>
-          </div>
-          <div className="flex space-x-2">
-            {SUPPORTED_LANGUAGES.map((lang, i) => (
-              <button 
-                key={i} 
-                onClick={() => handleSend(`Hello, I'd like to speak in ${lang.name}`)}
-                className="text-[10px] bg-white dark:bg-white/5 px-3 py-1 rounded-full text-slate-500 whitespace-nowrap border border-slate-200 dark:border-white/10 hover:border-primary/50 transition-colors shadow-sm"
-              >
-                {lang.name}
-              </button>
-            ))}
-          </div>
+        {/* Language Selection Bar */}
+        <div className="flex items-center space-x-3 overflow-x-auto no-scrollbar py-2 border-b border-slate-100 dark:border-white/5">
+          <span className="text-[10px] uppercase tracking-widest text-slate-400 font-bold whitespace-nowrap shrink-0">I SPEAK:</span>
+          {SUPPORTED_LANGUAGES.map((lang, i) => (
+            <button 
+              key={i} 
+              onClick={() => handleSend(`Hello, can we speak in ${lang}?`)}
+              className="text-[11px] bg-white dark:bg-white/5 px-4 py-1.5 rounded-full text-slate-500 whitespace-nowrap hover:bg-primary/10 hover:text-primary transition-all border border-slate-200 dark:border-white/10 shadow-sm"
+            >
+              {lang}
+            </button>
+          ))}
         </div>
       </div>
 
       {/* Messages Area */}
       <div 
         ref={scrollRef} 
-        className="flex-1 overflow-y-auto px-6 py-4 space-y-4 no-scrollbar min-h-0"
-        style={{ height: 'calc(100vh - 380px)' }}
+        className="flex-1 overflow-y-auto px-6 py-6 space-y-6 no-scrollbar"
       >
         {messages.map((m, i) => (
           <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-            <div className={`max-w-[85%] p-4 rounded-2xl text-xs leading-relaxed ${
+            <div className={`max-w-[85%] p-4 rounded-3xl text-[13px] leading-relaxed shadow-sm ${
               m.role === 'user' 
-                ? 'bg-primary text-white rounded-br-none shadow-md' 
-                : 'bg-white dark:bg-card-dark text-slate-700 dark:text-slate-200 rounded-bl-none border border-slate-200/50 dark:border-white/5 shadow-sm'
+                ? 'bg-primary text-white rounded-br-none shadow-primary/20' 
+                : 'bg-white dark:bg-card-dark text-slate-700 dark:text-slate-200 rounded-bl-none border border-slate-100 dark:border-white/5'
             }`}>
               {m.text}
             </div>
@@ -92,43 +82,43 @@ const ChatView: React.FC<ChatViewProps> = ({ messages, setMessages }) => {
         ))}
         {isTyping && (
           <div className="flex justify-start">
-            <div className="bg-white dark:bg-card-dark p-4 rounded-2xl rounded-bl-none flex space-x-1 shadow-sm border border-slate-200/50 dark:border-white/5">
-              <div className="w-1.5 h-1.5 bg-slate-300 rounded-full animate-bounce"></div>
-              <div className="w-1.5 h-1.5 bg-slate-300 rounded-full animate-bounce [animation-delay:0.2s]"></div>
-              <div className="w-1.5 h-1.5 bg-slate-300 rounded-full animate-bounce [animation-delay:0.4s]"></div>
+            <div className="bg-white dark:bg-card-dark p-4 rounded-3xl rounded-bl-none flex space-x-1.5 shadow-sm border border-slate-100 dark:border-white/5">
+              <div className="w-1.5 h-1.5 bg-primary/30 rounded-full animate-bounce"></div>
+              <div className="w-1.5 h-1.5 bg-primary/30 rounded-full animate-bounce [animation-delay:0.2s]"></div>
+              <div className="w-1.5 h-1.5 bg-primary/30 rounded-full animate-bounce [animation-delay:0.4s]"></div>
             </div>
           </div>
         )}
       </div>
 
-      {/* Footer Area: Quick Prompts & Input */}
-      <div className="px-6 py-4 bg-background-light dark:bg-background-dark">
+      {/* Footer Area with Quick Prompts and Input */}
+      <div className="px-6 pb-4 bg-background-light dark:bg-background-dark border-t border-slate-100 dark:border-white/5 pt-4">
         {/* Quick Prompts */}
         <div className="pb-4 flex overflow-x-auto gap-2 no-scrollbar">
           {QUICK_PROMPTS.map((prompt, idx) => (
             <button
               key={idx}
               onClick={() => handleSend(prompt)}
-              className="whitespace-nowrap px-4 py-2 bg-white dark:bg-card-dark border border-slate-200 dark:border-white/10 rounded-full text-[10px] text-slate-500 hover:border-primary hover:text-primary transition-all active:scale-95 shadow-sm"
+              className="whitespace-nowrap px-4 py-2 bg-white dark:bg-card-dark border border-slate-200 dark:border-white/10 rounded-full text-[11px] text-slate-500 hover:border-primary hover:text-primary transition-all active:scale-95 shadow-sm font-medium"
             >
               {prompt}
             </button>
           ))}
         </div>
 
-        {/* Input Area */}
-        <div className="flex gap-2 items-center">
+        {/* Input Field */}
+        <div className="flex gap-3 items-center relative">
           <input 
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyPress={(e) => e.key === 'Enter' && handleSend()}
-            placeholder="Ask about shoots, pricing, styling..."
-            className="flex-1 text-sm bg-white dark:bg-card-dark border-none ring-1 ring-slate-200 dark:ring-white/10 focus:ring-2 focus:ring-primary rounded-2xl py-3.5 px-5 dark:text-white placeholder:text-slate-400 shadow-sm"
+            placeholder="Type in your language..."
+            className="flex-1 text-[13px] bg-white dark:bg-card-dark border-none ring-1 ring-slate-200 dark:ring-white/10 focus:ring-2 focus:ring-primary rounded-full py-4 px-6 dark:text-white placeholder:text-slate-400 shadow-sm"
           />
           <button 
             onClick={() => handleSend()} 
             disabled={!input.trim()}
-            className="bg-primary text-white w-12 h-12 rounded-2xl flex items-center justify-center shadow-lg shadow-primary/20 hover:opacity-90 transition-all disabled:opacity-30 disabled:shadow-none"
+            className="bg-primary/10 text-primary w-12 h-12 rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition-all duration-300 disabled:opacity-20"
           >
             <span className="material-icons-round">send</span>
           </button>
