@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { PortfolioTab } from '../types';
 import PortfolioGrid from './PortfolioGrid';
@@ -30,10 +29,18 @@ const WorkView: React.FC = () => {
         {activeTab === PortfolioTab.PORTFOLIO && (
           <>
             <section className="mb-10 px-2">
-              <h2 className="font-display text-4xl text-primary mb-3">The Artist</h2>
-              <p className="text-sm leading-relaxed text-slate-600 dark:text-slate-400 font-light max-w-sm">
-                Capturing the quiet moments between the chaos. Specialized in natural light, intimate portraiture, and high-end events. Every frame tells a story of light, shadow, and human connection.
-              </p>
+              <div className="flex justify-between items-start mb-6">
+                <div>
+                  <h2 className="font-display text-4xl text-primary mb-3">The Artist</h2>
+                  <p className="text-sm leading-relaxed text-slate-600 dark:text-slate-400 font-light max-w-sm">
+                    Capturing the quiet moments between the chaos. Specialized in natural light, intimate portraiture, and high-end events. Every frame tells a story of light, shadow, and human connection.
+                  </p>
+                </div>
+                <div className="w-24 h-24 rounded-2xl overflow-hidden border border-slate-100 dark:border-white/5 shadow-sm rotate-3">
+                   <img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?q=80&w=200&auto=format&fit=crop" alt="Maternity Highlight" className="w-full h-full object-cover" />
+                </div>
+              </div>
+              
               <div className="mt-6 flex items-center space-x-4">
                 <button className="bg-primary text-white px-6 py-2.5 rounded-full text-sm font-medium shadow-lg shadow-primary/20 hover:scale-105 active:scale-95 transition-all">
                   Book a Session
@@ -41,6 +48,21 @@ const WorkView: React.FC = () => {
                 <div className="flex space-x-3 text-slate-400">
                   <span className="material-icons-round text-xl cursor-pointer hover:text-primary transition-colors">camera_alt</span>
                   <span className="material-icons-round text-xl cursor-pointer hover:text-primary transition-colors">mail_outline</span>
+                </div>
+              </div>
+            </section>
+
+            {/* Featured Maternity Shot */}
+            <section className="mb-12 px-2">
+              <div className="group relative rounded-3xl overflow-hidden shadow-2xl h-80 transition-transform duration-700 hover:scale-[1.02]">
+                <img 
+                  src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?q=80&w=1000&auto=format&fit=crop" 
+                  className="w-full h-full object-cover" 
+                  alt="Featured Maternity" 
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex flex-col justify-end p-8">
+                  <span className="text-[10px] text-white/70 uppercase tracking-[0.3em] font-bold mb-2">Featured Series</span>
+                  <h3 className="font-display text-5xl text-white">Maternity Elegance</h3>
                 </div>
               </div>
             </section>
@@ -113,7 +135,7 @@ const WorkView: React.FC = () => {
                 fabrics="Wool, Heavy Silk, Poplin"
                 colors="Charcoal, Navy, White, Soft Blue"
                 tip="Iron everything! Tailored blazers work best. Keep jewelry minimal and classic."
-                imageUrl="https://images.unsplash.com/photo-1558223039-d074360667e2?q=80&w=400&auto=format&fit=crop"
+                imageUrl="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=400&auto=format&fit=crop"
               />
             </div>
           </div>

@@ -2,10 +2,10 @@ import React, { useState, useRef, useEffect } from 'react';
 import { chatWithAssistant } from '../lib/gemini';
 
 const QUICK_PROMPTS = [
-  "Maternity dress ideas?",
   "What should I wear?",
-  "Shoot pricing in ₹?",
-  "Wedding availability"
+  "Maternity shoot image",
+  "Corporate shoot image",
+  "Wedding colors"
 ];
 
 const LANGUAGES = ["English", "हिन्दी", "Español", "Français", "Deutsch", "मराठी", "తెలుగు"];
@@ -39,15 +39,35 @@ const ChatView: React.FC<ChatViewProps> = ({ messages, setMessages }) => {
     setIsTyping(false);
   };
 
+  const renderMessageContent = (text: string) => {
+    const urlRegex = /(https?:\/\/[^\s]+)/g;
+    const parts = text.split(urlRegex);
+    
+    return parts.map((part, i) => {
+      if (part.match(urlRegex)) {
+        const isImage = part.match(/\.(jpeg|jpg|gif|png|webp)/i) || part.includes('unsplash.com');
+        if (isImage) {
+          return (
+            <div key={i} className="my-3 rounded-xl overflow-hidden shadow-md">
+              <img src={part} alt="Shared visual" className="w-full h-auto object-cover max-h-60" />
+            </div>
+          );
+        }
+        return <a key={i} href={part} target="_blank" rel="noopener noreferrer" className="underline break-all">{part}</a>;
+      }
+      return <span key={i}>{part}</span>;
+    });
+  };
+
   return (
     <div className="flex flex-col h-[calc(100vh-140px)] bg-background-light dark:bg-background-dark overflow-hidden animate-in fade-in duration-500">
-      {/* Assistant Branding */}
+      {/* Branding */}
       <div className="px-6 pt-6 pb-2">
         <h2 className="font-display text-7xl text-primary opacity-90 mb-4 select-none">Assistant</h2>
         
-        {/* Languages Selection */}
+        {/* Language Quick-select */}
         <div className="flex items-center space-x-3 overflow-x-auto no-scrollbar py-2">
-          <span className="text-[10px] font-black text-slate-400 tracking-widest shrink-0 uppercase">Speaks:</span>
+          <span className="text-[10px] font-black text-slate-400 tracking-widest shrink-0 uppercase">Fluent in:</span>
           {LANGUAGES.map((l) => (
             <button 
               key={l} 
@@ -60,7 +80,7 @@ const ChatView: React.FC<ChatViewProps> = ({ messages, setMessages }) => {
         </div>
       </div>
 
-      {/* Chat History */}
+      {/* Messages */}
       <div ref={scrollRef} className="flex-1 overflow-y-auto px-6 py-4 space-y-6 no-scrollbar">
         {messages.map((m, i) => (
           <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
@@ -69,7 +89,7 @@ const ChatView: React.FC<ChatViewProps> = ({ messages, setMessages }) => {
                 ? 'bg-primary text-white rounded-br-none shadow-primary/20' 
                 : 'bg-white dark:bg-card-dark text-slate-700 dark:text-slate-200 rounded-bl-none border border-slate-100 dark:border-white/5'
             }`}>
-              {m.text}
+              {renderMessageContent(m.text)}
             </div>
           </div>
         ))}
@@ -84,7 +104,7 @@ const ChatView: React.FC<ChatViewProps> = ({ messages, setMessages }) => {
         )}
       </div>
 
-      {/* Input / Control Bar */}
+      {/* Footer Controls */}
       <div className="px-6 pb-6 pt-2 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md">
         <div className="flex gap-2 overflow-x-auto no-scrollbar pb-4">
           {QUICK_PROMPTS.map((p) => (
