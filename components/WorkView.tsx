@@ -36,8 +36,12 @@ const WorkView: React.FC = () => {
                     Capturing the quiet moments between the chaos. Specialized in natural light, intimate portraiture, and high-end events. Every frame tells a story of light, shadow, and human connection.
                   </p>
                 </div>
-                <div className="w-24 h-24 rounded-2xl overflow-hidden border border-slate-100 dark:border-white/5 shadow-sm rotate-3">
-                   <img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?q=80&w=200&auto=format&fit=crop" alt="Maternity Highlight" className="w-full h-full object-cover" />
+                <div className="w-24 h-24 rounded-2xl overflow-hidden border border-slate-200 dark:border-white/10 shadow-lg rotate-3 flex-shrink-0 bg-slate-100">
+                   <img 
+                    src="https://aaft.com/blog/wp-content/uploads/2025/05/AdobeStock_150026021-1024x683.jpeg" 
+                    alt="Shradha - The Artist" 
+                    className="w-full h-full object-cover" 
+                   />
                 </div>
               </div>
               
@@ -52,7 +56,7 @@ const WorkView: React.FC = () => {
               </div>
             </section>
 
-            {/* Featured Maternity Shot */}
+            {/* Featured Series */}
             <section className="mb-12 px-2">
               <div className="group relative rounded-3xl overflow-hidden shadow-2xl h-80 transition-transform duration-700 hover:scale-[1.02]">
                 <img 
@@ -82,27 +86,31 @@ const WorkView: React.FC = () => {
         {activeTab === PortfolioTab.SERVICES && (
           <div className="py-6 space-y-4 animate-in slide-in-from-bottom-4 duration-500">
             <h2 className="font-display text-4xl text-primary mb-2 text-center">Our Services</h2>
-            <p className="text-xs text-center text-slate-400 mb-6 uppercase tracking-widest">Pricing & Packages</p>
-            <div className="grid gap-4">
+            <p className="text-xs text-center text-slate-400 mb-6 uppercase tracking-widest">Premium Photography Packages</p>
+            <div className="grid gap-8">
               <ServiceCard 
-                title="Wedding Storytelling" 
-                desc="Comprehensive coverage of your special day with a timeless romantic aesthetic."
-                price="Starting from ₹1,50,000"
+                title="Corporate & Branding" 
+                desc="Modern professional branding with a sharp industrial edge. High-end headshots for tech-leaders and creative entrepreneurs."
+                price="Starting from ₹15,000"
+                imageUrl="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=800&auto=format&fit=crop"
               />
               <ServiceCard 
                 title="Maternity Portraits" 
-                desc="Celebrate the journey of motherhood with elegant, glow-focused sessions."
+                desc="Celebrate motherhood with high-end, elegant portraits. Featuring our signature sheer-fabric and heritage aesthetics."
                 price="₹35,000"
+                imageUrl="https://www.athiniphotos.in/wp-content/uploads/2021/05/Abhinaya-Sai-Aravind-INSTA-2.jpg"
               />
               <ServiceCard 
-                title="Pre-Wedding" 
-                desc="Cinematic couple sessions at breathtaking locations."
+                title="Wedding Storytelling" 
+                desc="Exquisite heritage wedding photography capturing the grandeur of traditions and the intimacy of modern love."
+                price="Starting from ₹1,50,000"
+                imageUrl="https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=800&auto=format&fit=crop"
+              />
+              <ServiceCard 
+                title="Vintage & Pre-Wedding" 
+                desc="Cinematic couple sessions featuring retro aesthetics, classic cars, and storytelling in unique settings."
                 price="₹60,000"
-              />
-              <ServiceCard 
-                title="Corporate Branding" 
-                desc="Elevate your professional presence with high-end headshots."
-                price="Starting from ₹15,000"
+                imageUrl="https://dstudios.in/wp-content/uploads/2024/09/creative-pre-wedding-photoshoot-venkat-keerthi-scaled.webp"
               />
             </div>
           </div>
@@ -112,30 +120,37 @@ const WorkView: React.FC = () => {
           <div className="py-6 space-y-8 animate-in slide-in-from-bottom-4 duration-500">
             <div className="text-center">
               <h2 className="font-display text-4xl text-primary mb-2">Style Guide</h2>
-              <p className="text-xs text-slate-400 uppercase tracking-widest">What to wear for your session</p>
+              <p className="text-xs text-slate-400 uppercase tracking-widest">Curating your visual narrative</p>
             </div>
             
             <div className="space-y-6">
               <StyleCard 
-                type="Maternity"
-                fabrics="Chiffon, Silk, Lace, Lightweight Cotton"
-                colors="Peach, Cream, Sage Green, Lavender"
-                tip="Empire waists highlight the bump beautifully. Flowy gowns create movement in natural light."
-                imageUrl="https://images.unsplash.com/photo-1594824476967-48c8b964273f?q=80&w=400&auto=format&fit=crop"
+                type="Corporate Professional"
+                fabrics="Tailored Wool, Crisp Poplin, High-quality Knits"
+                colors="Charcoal, Navy, Black, Tech Blue"
+                tip="Wear well-fitted blazers and solid neutrals. Clean lines and minimal patterns project the most professional image for industrial and tech branding."
+                imageUrl="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=400&auto=format&fit=crop"
               />
               <StyleCard 
-                type="Pre-Wedding"
-                fabrics="Linen, Chiffon, Denim, Structured Cotton"
-                colors="Dusty Rose, Navy, White, Earth Tones"
-                tip="Coordinate colors without matching exactly. Avoid busy logos or heavy patterns."
-                imageUrl="https://images.unsplash.com/photo-1519699047748-de8e457a634e?q=80&w=400&auto=format&fit=crop"
+                type="Elegant Maternity"
+                fabrics="Chiffon, Silk Gowns, Sheer Voile"
+                colors="Maroon, Ivory, Dusty Rose, Midnight Blue"
+                tip="Flowy gowns and sheer fabrics create an ethereal, glowy aesthetic. Bold colors provide a stunning contrast in studio settings."
+                imageUrl="https://www.athiniphotos.in/wp-content/uploads/2021/05/Abhinaya-Sai-Aravind-INSTA-2.jpg"
               />
               <StyleCard 
-                type="Corporate"
-                fabrics="Wool, Heavy Silk, Poplin"
-                colors="Charcoal, Navy, White, Soft Blue"
-                tip="Iron everything! Tailored blazers work best. Keep jewelry minimal and classic."
-                imageUrl="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=400&auto=format&fit=crop"
+                type="Heritage Wedding"
+                fabrics="Raw Silk, Banarasi, Brocade, Velvet"
+                colors="Crimson Red, Gold, Emerald, Ivory"
+                tip="Focus on texture—embroidery and heavy silks photograph beautifully under grand lighting."
+                imageUrl="https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=400&auto=format&fit=crop"
+              />
+              <StyleCard 
+                type="Pre-Wedding Story"
+                fabrics="Linen, Denim, Structured Cotton"
+                colors="Earth Tones, Navy, White"
+                tip="Coordinate colors without matching. Vintage sets like classic cars require timeless silhouettes like A-line dresses or leather jackets."
+                imageUrl="https://dstudios.in/wp-content/uploads/2024/09/Venkat-keerthi-creative-pre-wedding-photoshoot-scaled.webp"
               />
             </div>
           </div>
@@ -161,11 +176,19 @@ const WorkView: React.FC = () => {
   );
 };
 
-const ServiceCard: React.FC<{ title: string; desc: string; price: string }> = ({ title, desc, price }) => (
-  <div className="bg-card-light dark:bg-card-dark p-6 rounded-2xl border border-slate-100 dark:border-white/5 text-left shadow-sm">
-    <h3 className="text-lg font-semibold text-slate-800 dark:text-white mb-2">{title}</h3>
-    <p className="text-sm text-slate-500 dark:text-slate-400 mb-4 leading-relaxed">{desc}</p>
-    <p className="text-primary font-bold">{price}</p>
+const ServiceCard: React.FC<{ title: string; desc: string; price: string; imageUrl: string }> = ({ title, desc, price, imageUrl }) => (
+  <div className="bg-card-light dark:bg-card-dark rounded-3xl overflow-hidden border border-slate-100 dark:border-white/5 text-left shadow-lg hover:shadow-xl transition-all duration-300">
+    <div className="h-64 w-full overflow-hidden">
+      <img src={imageUrl} alt={title} className="w-full h-full object-cover transition-transform duration-700 hover:scale-110" />
+    </div>
+    <div className="p-6">
+      <h3 className="text-xl font-bold text-slate-800 dark:text-white mb-2">{title}</h3>
+      <p className="text-[13px] text-slate-500 dark:text-slate-400 mb-4 leading-relaxed font-light">{desc}</p>
+      <div className="flex justify-between items-center">
+        <p className="text-primary font-bold text-sm">{price}</p>
+        <button className="text-[10px] uppercase tracking-widest font-bold text-primary border border-primary/20 px-4 py-1.5 rounded-full hover:bg-primary hover:text-white transition-all">Select</button>
+      </div>
+    </div>
   </div>
 );
 
