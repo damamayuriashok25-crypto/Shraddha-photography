@@ -19,16 +19,17 @@ TONE & RULES:
 - Elegant, warm, and helpful.
 - Keep responses concise (2-3 sentences max).
 - Detect the user's language automatically and respond in that language (Hindi, English, etc.).
-- If the user asks "What should I wear?", ask them which type of shoot they are planning first.
+- If the user asks "What should I wear?", provide specific advice based on the shoot type.
 `;
 
 export async function chatWithAssistant(userMessage: string) {
   try {
+    // Vite replaces 'process.env.API_KEY' with the actual string during build
     const apiKey = process.env.API_KEY;
     
     if (!apiKey || apiKey === "") {
-      console.error("Gemini API Key is missing. Ensure process.env.API_KEY is defined.");
-      return "I'm currently unable to connect to the studio's brain. Please ensure the API Key is set in the environment settings!";
+      console.error("Gemini API Key is missing in environment.");
+      return "I'm currently unable to connect to the studio's brain. Please ensure the API_KEY is set in your Vercel project settings!";
     }
     
     const ai = new GoogleGenAI({ apiKey });
@@ -44,6 +45,6 @@ export async function chatWithAssistant(userMessage: string) {
     return response.text || "I'm here to help with your photography needs!";
   } catch (error) {
     console.error("Gemini API Error:", error);
-    return "I'm having a little trouble connecting to the studio. Please try again or reach out to us at hello@shradhaphotography.com!";
+    return "I'm having a little trouble connecting to the studio. Please try again in a moment or reach out to us at hello@shradhaphotography.com!";
   }
 }
