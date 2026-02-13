@@ -2,10 +2,10 @@ import React, { useState, useRef, useEffect } from 'react';
 import { chatWithAssistant } from '../lib/gemini';
 
 const QUICK_PROMPTS = [
-  "Maternity shoot pricing?",
-  "Dress for maternity shoot?",
+  "What should I wear?",
+  "Maternity styling tips",
   "Wedding photography in ₹?",
-  "Pre-wedding packages"
+  "Pre-wedding location ideas"
 ];
 
 const LANGUAGES = ["English", "हिन्दी", "Español", "Français", "Deutsch", "मराठी", "తెలుగు"];

@@ -9,25 +9,21 @@ const WorkView: React.FC = () => {
 
   return (
     <div className="animate-in fade-in duration-500">
-      <div className="flex justify-center space-x-8 mt-4 mb-6 border-b border-slate-200 dark:border-slate-800">
-        <button 
-          onClick={() => setActiveTab(PortfolioTab.PORTFOLIO)}
-          className={`pb-3 border-b-2 transition-all text-sm font-medium ${activeTab === PortfolioTab.PORTFOLIO ? 'border-primary text-primary' : 'border-transparent text-slate-400 dark:text-slate-500'}`}
-        >
-          Portfolio
-        </button>
-        <button 
-          onClick={() => setActiveTab(PortfolioTab.SERVICES)}
-          className={`pb-3 border-b-2 transition-all text-sm font-medium ${activeTab === PortfolioTab.SERVICES ? 'border-primary text-primary' : 'border-transparent text-slate-400 dark:text-slate-500'}`}
-        >
-          Services
-        </button>
-        <button 
-          onClick={() => setActiveTab(PortfolioTab.TESTIMONIALS)}
-          className={`pb-3 border-b-2 transition-all text-sm font-medium ${activeTab === PortfolioTab.TESTIMONIALS ? 'border-primary text-primary' : 'border-transparent text-slate-400 dark:text-slate-500'}`}
-        >
-          Testimonials
-        </button>
+      <div className="flex justify-center space-x-6 mt-4 mb-6 border-b border-slate-200 dark:border-slate-800 px-4">
+        {[
+          { id: PortfolioTab.PORTFOLIO, label: 'Portfolio' },
+          { id: PortfolioTab.SERVICES, label: 'Services' },
+          { id: PortfolioTab.STYLE, label: 'Style Guide' },
+          { id: PortfolioTab.TESTIMONIALS, label: 'Reviews' }
+        ].map((tab) => (
+          <button 
+            key={tab.id}
+            onClick={() => setActiveTab(tab.id)}
+            className={`pb-3 border-b-2 transition-all text-[13px] font-medium whitespace-nowrap ${activeTab === tab.id ? 'border-primary text-primary' : 'border-transparent text-slate-400 dark:text-slate-500'}`}
+          >
+            {tab.label}
+          </button>
+        ))}
       </div>
 
       <div className="px-4 pb-8">
@@ -62,8 +58,9 @@ const WorkView: React.FC = () => {
         )}
 
         {activeTab === PortfolioTab.SERVICES && (
-          <div className="py-6 text-center animate-in slide-in-from-bottom-4 duration-500">
-            <h2 className="font-display text-4xl text-primary mb-6">Our Services</h2>
+          <div className="py-6 space-y-4 animate-in slide-in-from-bottom-4 duration-500">
+            <h2 className="font-display text-4xl text-primary mb-2 text-center">Our Services</h2>
+            <p className="text-xs text-center text-slate-400 mb-6 uppercase tracking-widest">Pricing & Packages</p>
             <div className="grid gap-4">
               <ServiceCard 
                 title="Wedding Storytelling" 
@@ -84,6 +81,39 @@ const WorkView: React.FC = () => {
                 title="Corporate Branding" 
                 desc="Elevate your professional presence with high-end headshots."
                 price="Starting from ₹15,000"
+              />
+            </div>
+          </div>
+        )}
+
+        {activeTab === PortfolioTab.STYLE && (
+          <div className="py-6 space-y-8 animate-in slide-in-from-bottom-4 duration-500">
+            <div className="text-center">
+              <h2 className="font-display text-4xl text-primary mb-2">Style Guide</h2>
+              <p className="text-xs text-slate-400 uppercase tracking-widest">What to wear for your session</p>
+            </div>
+            
+            <div className="space-y-6">
+              <StyleCard 
+                type="Maternity"
+                fabrics="Chiffon, Silk, Lace, Lightweight Cotton"
+                colors="Peach, Cream, Sage Green, Lavender"
+                tip="Empire waists highlight the bump beautifully. Flowy gowns create movement in natural light."
+                imageUrl="https://images.unsplash.com/photo-1594824476967-48c8b964273f?q=80&w=400&auto=format&fit=crop"
+              />
+              <StyleCard 
+                type="Pre-Wedding"
+                fabrics="Linen, Chiffon, Denim, Structured Cotton"
+                colors="Dusty Rose, Navy, White, Earth Tones"
+                tip="Coordinate colors without matching exactly. Avoid busy logos or heavy patterns."
+                imageUrl="https://images.unsplash.com/photo-1519699047748-de8e457a634e?q=80&w=400&auto=format&fit=crop"
+              />
+              <StyleCard 
+                type="Corporate"
+                fabrics="Wool, Heavy Silk, Poplin"
+                colors="Charcoal, Navy, White, Soft Blue"
+                tip="Iron everything! Tailored blazers work best. Keep jewelry minimal and classic."
+                imageUrl="https://images.unsplash.com/photo-1558223039-d074360667e2?q=80&w=400&auto=format&fit=crop"
               />
             </div>
           </div>
@@ -112,8 +142,35 @@ const WorkView: React.FC = () => {
 const ServiceCard: React.FC<{ title: string; desc: string; price: string }> = ({ title, desc, price }) => (
   <div className="bg-card-light dark:bg-card-dark p-6 rounded-2xl border border-slate-100 dark:border-white/5 text-left shadow-sm">
     <h3 className="text-lg font-semibold text-slate-800 dark:text-white mb-2">{title}</h3>
-    <p className="text-sm text-slate-500 dark:text-slate-400 mb-4">{desc}</p>
+    <p className="text-sm text-slate-500 dark:text-slate-400 mb-4 leading-relaxed">{desc}</p>
     <p className="text-primary font-bold">{price}</p>
+  </div>
+);
+
+const StyleCard: React.FC<{ type: string; fabrics: string; colors: string; tip: string; imageUrl: string }> = ({ type, fabrics, colors, tip, imageUrl }) => (
+  <div className="bg-card-light dark:bg-card-dark rounded-3xl overflow-hidden border border-slate-100 dark:border-white/5 shadow-sm">
+    <div className="h-40 w-full overflow-hidden">
+      <img src={imageUrl} alt={type} className="w-full h-full object-cover" />
+    </div>
+    <div className="p-6">
+      <h3 className="text-xl font-bold text-primary mb-4">{type} Style Guide</h3>
+      <div className="space-y-3">
+        <div>
+          <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-1">Recommended Fabrics</span>
+          <p className="text-sm text-slate-700 dark:text-slate-300">{fabrics}</p>
+        </div>
+        <div>
+          <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-1">Color Palette</span>
+          <p className="text-sm text-slate-700 dark:text-slate-300">{colors}</p>
+        </div>
+        <div className="pt-2">
+          <p className="text-[13px] italic text-slate-500 dark:text-slate-400 leading-relaxed">
+            <span className="material-icons-round text-primary text-[14px] align-middle mr-1">tips_and_updates</span>
+            {tip}
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
 );
 

@@ -9,6 +9,7 @@ export enum AppView {
 export enum PortfolioTab {
   PORTFOLIO = 'portfolio',
   SERVICES = 'services',
+  STYLE = 'style',
   TESTIMONIALS = 'testimonials'
 }
 
