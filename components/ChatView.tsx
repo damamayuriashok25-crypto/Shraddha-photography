@@ -2,10 +2,10 @@ import React, { useState, useRef, useEffect } from 'react';
 import { chatWithAssistant } from '../lib/gemini';
 
 const QUICK_PROMPTS = [
+  "Maternity dress ideas?",
+  "Shoot pricing in ₹?",
   "What should I wear?",
-  "Maternity styling tips",
-  "Wedding photography in ₹?",
-  "Pre-wedding location ideas"
+  "Wedding availability"
 ];
 
 const LANGUAGES = ["English", "हिन्दी", "Español", "Français", "Deutsch", "मराठी", "తెలుగు"];
@@ -40,18 +40,18 @@ const ChatView: React.FC<ChatViewProps> = ({ messages, setMessages }) => {
   };
 
   return (
-    <div className="flex flex-col h-[calc(100vh-140px)] bg-background-light dark:bg-background-dark overflow-hidden">
+    <div className="flex flex-col h-[calc(100vh-140px)] bg-background-light dark:bg-background-dark overflow-hidden animate-in fade-in duration-500">
       {/* Header Area */}
       <div className="px-6 pt-6 pb-2">
-        <h2 className="font-display text-7xl text-primary opacity-90 mb-4 animate-in slide-in-from-left duration-700">Assistant</h2>
+        <h2 className="font-display text-7xl text-primary opacity-90 mb-4">Assistant</h2>
         
-        {/* Language Bar */}
+        {/* Language Selection */}
         <div className="flex items-center space-x-3 overflow-x-auto no-scrollbar py-2">
           <span className="text-[10px] font-black text-slate-400 tracking-widest shrink-0 uppercase">I Speak:</span>
           {LANGUAGES.map((l) => (
             <button 
               key={l} 
-              onClick={() => handleSend(`Can we talk in ${l}?`)} 
+              onClick={() => handleSend(`Hello, can we speak in ${l}?`)} 
               className="text-[11px] bg-white dark:bg-white/5 px-4 py-1.5 rounded-full text-slate-500 whitespace-nowrap border border-slate-100 dark:border-white/5 shadow-sm hover:border-primary/30 transition-all"
             >
               {l}
@@ -60,13 +60,13 @@ const ChatView: React.FC<ChatViewProps> = ({ messages, setMessages }) => {
         </div>
       </div>
 
-      {/* Chat Messages */}
-      <div ref={scrollRef} className="flex-1 overflow-y-auto px-6 py-6 space-y-6 no-scrollbar">
+      {/* Messages */}
+      <div ref={scrollRef} className="flex-1 overflow-y-auto px-6 py-4 space-y-6 no-scrollbar">
         {messages.map((m, i) => (
           <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-            <div className={`max-w-[85%] px-5 py-4 rounded-[2rem] shadow-sm text-[13px] leading-relaxed animate-in fade-in zoom-in-95 duration-300 ${
+            <div className={`max-w-[85%] px-5 py-4 rounded-[2rem] shadow-sm text-[13px] leading-relaxed animate-in slide-in-from-bottom-2 duration-300 ${
               m.role === 'user' 
-                ? 'bg-primary text-white rounded-br-none shadow-primary/20' 
+                ? 'bg-primary text-white rounded-br-none' 
                 : 'bg-white dark:bg-card-dark text-slate-700 dark:text-slate-200 rounded-bl-none border border-slate-100 dark:border-white/5'
             }`}>
               {m.text}
@@ -102,12 +102,12 @@ const ChatView: React.FC<ChatViewProps> = ({ messages, setMessages }) => {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyPress={(e) => e.key === 'Enter' && handleSend()}
-            placeholder="Type in any language..."
-            className="flex-1 bg-white dark:bg-card-dark border-none ring-1 ring-slate-200 dark:ring-white/10 rounded-full py-4.5 px-7 text-[13px] shadow-sm focus:ring-2 focus:ring-primary transition-all placeholder:text-slate-300"
+            placeholder="Ask about dress suggestions..."
+            className="flex-1 bg-white dark:bg-card-dark border-none ring-1 ring-slate-200 dark:ring-white/10 rounded-full py-4.5 px-7 text-[13px] shadow-sm focus:ring-2 focus:ring-primary transition-all"
           />
           <button 
             onClick={() => handleSend()} 
-            disabled={!input.trim() && !isTyping}
+            disabled={!input.trim()}
             className="w-14 h-14 bg-[#D1C5B8] text-white rounded-full flex items-center justify-center shadow-lg active:scale-95 transition-all disabled:opacity-50"
           >
             <span className="material-icons-round text-2xl">send</span>
