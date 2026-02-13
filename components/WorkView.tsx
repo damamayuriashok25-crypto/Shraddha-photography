@@ -60,9 +60,9 @@ const WorkView: React.FC = () => {
             <section className="mb-12 px-2">
               <div className="group relative rounded-3xl overflow-hidden shadow-2xl h-80 transition-transform duration-700 hover:scale-[1.02]">
                 <img 
-                  src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?q=80&w=1000&auto=format&fit=crop" 
+                  src="https://www.athiniphotos.in/wp-content/uploads/2021/05/Abhinaya-Sai-Aravind-INSTA-2.jpg" 
                   className="w-full h-full object-cover" 
-                  alt="Featured Maternity" 
+                  alt="Featured Heritage Maternity" 
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex flex-col justify-end p-8">
                   <span className="text-[10px] text-white/70 uppercase tracking-[0.3em] font-bold mb-2">Featured Series</span>
